@@ -13,5 +13,9 @@ namespace Food.Controllers
         {
             return View();
         }
+        public ActionResult check()
+        {
+            return View();
+        }
     }
 }

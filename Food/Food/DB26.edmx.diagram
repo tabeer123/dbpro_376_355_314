@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0f6ac6357db242b19c7ee2bebad3f09c" Name="Diagram1">
+        <EntityTypeShape EntityType="DB26Model.CancelOrder" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB26Model.FoodItem" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB26Model.OrderFood" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB26Model.Order" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB26Model.Person" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <AssociationConnector Association="DB26Model.FK_CancelOrders_FoodItems" ManuallyRouted="false" />
+        <AssociationConnector Association="DB26Model.FK_CancelOrders_Orders1" ManuallyRouted="false" />
+        <AssociationConnector Association="DB26Model.FK_OrderFood_FoodItems" ManuallyRouted="false" />
+        <AssociationConnector Association="DB26Model.FK_OrderFood_Orders" ManuallyRouted="false" />
+        <AssociationConnector Association="DB26Model.FK_Orders_Person" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

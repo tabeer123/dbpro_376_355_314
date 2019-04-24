@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DB26Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CancelOrder">
+    <Key>
+      <PropertyRef Name="FoodID" />
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="FoodID" Type="Int32" Nullable="false" />
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="FoodItem" Relationship="Self.FK_CancelOrders_FoodItems" FromRole="CancelOrders" ToRole="FoodItems" />
+    <NavigationProperty Name="Order" Relationship="Self.FK_CancelOrders_Orders1" FromRole="CancelOrders" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="FoodItem">
+    <Key>
+      <PropertyRef Name="FoodID" />
+    </Key>
+    <Property Name="FoodID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Price" Type="Double" Nullable="false" />
+    <Property Name="Picture" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="CancelOrders" Relationship="Self.FK_CancelOrders_FoodItems" FromRole="FoodItems" ToRole="CancelOrders" />
+    <NavigationProperty Name="OrderFoods" Relationship="Self.FK_OrderFood_FoodItems" FromRole="FoodItems" ToRole="OrderFood" />
+  </EntityType>
+  <EntityType Name="OrderFood">
+    <Key>
+      <PropertyRef Name="FoodID" />
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="FoodID" Type="Int32" Nullable="false" />
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="FoodItem" Relationship="Self.FK_OrderFood_FoodItems" FromRole="OrderFood" ToRole="FoodItems" />
+    <NavigationProperty Name="Order" Relationship="Self.FK_OrderFood_Orders" FromRole="OrderFood" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PersonID" Type="Int32" Nullable="false" />
+    <Property Name="Order_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Bill" Type="Double" Nullable="false" />
+    <Property Name="Items" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Delivery_Time" Type="Time" Nullable="false" Precision="7" />
+    <NavigationProperty Name="CancelOrders" Relationship="Self.FK_CancelOrders_Orders1" FromRole="Orders" ToRole="CancelOrders" />
+    <NavigationProperty Name="OrderFoods" Relationship="Self.FK_OrderFood_Orders" FromRole="Orders" ToRole="OrderFood" />
+    <NavigationProperty Name="Person" Relationship="Self.FK_Orders_Person" FromRole="Orders" ToRole="Person" />
+  </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="PersonID" />
+    </Key>
+    <Property Name="PersonID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Cell_No" Type="Int32" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Discriminator" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Person" FromRole="Person" ToRole="Orders" />
+  </EntityType>
+  <Association Name="FK_CancelOrders_FoodItems">
+    <End Role="FoodItems" Type="Self.FoodItem" Multiplicity="1" />
+    <End Role="CancelOrders" Type="Self.CancelOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FoodItems">
+        <PropertyRef Name="FoodID" />
+      </Principal>
+      <Dependent Role="CancelOrders">
+        <PropertyRef Name="FoodID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CancelOrders_Orders1">
+    <End Role="Orders" Type="Self.Order" Multiplicity="1" />
+    <End Role="CancelOrders" Type="Self.CancelOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="CancelOrders">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderFood_FoodItems">
+    <End Role="FoodItems" Type="Self.FoodItem" Multiplicity="1" />
+    <End Role="OrderFood" Type="Self.OrderFood" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FoodItems">
+        <PropertyRef Name="FoodID" />
+      </Principal>
+      <Dependent Role="OrderFood">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderFood_Orders">
+    <End Role="Orders" Type="Self.Order" Multiplicity="1" />
+    <End Role="OrderFood" Type="Self.OrderFood" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="OrderFood">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Person">
+    <End Role="Person" Type="Self.Person" Multiplicity="1" />
+    <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="PersonID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="PersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DB26Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CancelOrders" EntityType="Self.CancelOrder" />
+    <EntitySet Name="FoodItems" EntityType="Self.FoodItem" />
+    <EntitySet Name="OrderFoods" EntityType="Self.OrderFood" />
+    <EntitySet Name="Orders" EntityType="Self.Order" />
+    <EntitySet Name="People" EntityType="Self.Person" />
+    <AssociationSet Name="FK_CancelOrders_FoodItems" Association="Self.FK_CancelOrders_FoodItems">
+      <End Role="FoodItems" EntitySet="FoodItems" />
+      <End Role="CancelOrders" EntitySet="CancelOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CancelOrders_Orders1" Association="Self.FK_CancelOrders_Orders1">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="CancelOrders" EntitySet="CancelOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderFood_FoodItems" Association="Self.FK_OrderFood_FoodItems">
+      <End Role="FoodItems" EntitySet="FoodItems" />
+      <End Role="OrderFood" EntitySet="OrderFoods" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderFood_Orders" Association="Self.FK_OrderFood_Orders">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="OrderFood" EntitySet="OrderFoods" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Person" Association="Self.FK_Orders_Person">
+      <End Role="Person" EntitySet="People" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

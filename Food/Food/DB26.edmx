@@ -1,0 +1,391 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DB26Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CancelOrders">
+          <Key>
+            <PropertyRef Name="FoodID" />
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="FoodID" Type="int" Nullable="false" />
+          <Property Name="OrderID" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FoodItems">
+          <Key>
+            <PropertyRef Name="FoodID" />
+          </Key>
+          <Property Name="FoodID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
+          <Property Name="Picture" Type="image" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Category" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderFood">
+          <Key>
+            <PropertyRef Name="FoodID" />
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="FoodID" Type="int" Nullable="false" />
+          <Property Name="OrderID" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonID" Type="int" Nullable="false" />
+          <Property Name="Order_Date" Type="datetime" Nullable="false" />
+          <Property Name="Bill" Type="float" Nullable="false" />
+          <Property Name="Items" Type="int" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Delivery_Time" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonID" />
+          </Key>
+          <Property Name="PersonID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="First_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Last_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Cell_No" Type="int" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Discriminator" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CancelOrders_FoodItems">
+          <End Role="FoodItems" Type="Self.FoodItems" Multiplicity="1" />
+          <End Role="CancelOrders" Type="Self.CancelOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FoodItems">
+              <PropertyRef Name="FoodID" />
+            </Principal>
+            <Dependent Role="CancelOrders">
+              <PropertyRef Name="FoodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CancelOrders_Orders1">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="CancelOrders" Type="Self.CancelOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="CancelOrders">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderFood_FoodItems">
+          <End Role="FoodItems" Type="Self.FoodItems" Multiplicity="1" />
+          <End Role="OrderFood" Type="Self.OrderFood" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FoodItems">
+              <PropertyRef Name="FoodID" />
+            </Principal>
+            <Dependent Role="OrderFood">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderFood_Orders">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="OrderFood" Type="Self.OrderFood" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="OrderFood">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB26ModelStoreContainer">
+          <EntitySet Name="CancelOrders" EntityType="Self.CancelOrders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FoodItems" EntityType="Self.FoodItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderFood" EntityType="Self.OrderFood" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CancelOrders_FoodItems" Association="Self.FK_CancelOrders_FoodItems">
+            <End Role="FoodItems" EntitySet="FoodItems" />
+            <End Role="CancelOrders" EntitySet="CancelOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CancelOrders_Orders1" Association="Self.FK_CancelOrders_Orders1">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="CancelOrders" EntitySet="CancelOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderFood_FoodItems" Association="Self.FK_OrderFood_FoodItems">
+            <End Role="FoodItems" EntitySet="FoodItems" />
+            <End Role="OrderFood" EntitySet="OrderFood" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderFood_Orders" Association="Self.FK_OrderFood_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderFood" EntitySet="OrderFood" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Person" Association="Self.FK_Orders_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB26Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CancelOrder">
+          <Key>
+            <PropertyRef Name="FoodID" />
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="FoodID" Type="Int32" Nullable="false" />
+          <Property Name="OrderID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FoodItem" Relationship="Self.FK_CancelOrders_FoodItems" FromRole="CancelOrders" ToRole="FoodItems" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_CancelOrders_Orders1" FromRole="CancelOrders" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="FoodItem">
+          <Key>
+            <PropertyRef Name="FoodID" />
+          </Key>
+          <Property Name="FoodID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="Picture" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="CancelOrders" Relationship="Self.FK_CancelOrders_FoodItems" FromRole="FoodItems" ToRole="CancelOrders" />
+          <NavigationProperty Name="OrderFoods" Relationship="Self.FK_OrderFood_FoodItems" FromRole="FoodItems" ToRole="OrderFood" />
+        </EntityType>
+        <EntityType Name="OrderFood">
+          <Key>
+            <PropertyRef Name="FoodID" />
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="FoodID" Type="Int32" Nullable="false" />
+          <Property Name="OrderID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FoodItem" Relationship="Self.FK_OrderFood_FoodItems" FromRole="OrderFood" ToRole="FoodItems" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_OrderFood_Orders" FromRole="OrderFood" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonID" Type="Int32" Nullable="false" />
+          <Property Name="Order_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Bill" Type="Double" Nullable="false" />
+          <Property Name="Items" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Delivery_Time" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="CancelOrders" Relationship="Self.FK_CancelOrders_Orders1" FromRole="Orders" ToRole="CancelOrders" />
+          <NavigationProperty Name="OrderFoods" Relationship="Self.FK_OrderFood_Orders" FromRole="Orders" ToRole="OrderFood" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_Orders_Person" FromRole="Orders" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonID" />
+          </Key>
+          <Property Name="PersonID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cell_No" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Discriminator" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Person" FromRole="Person" ToRole="Orders" />
+        </EntityType>
+        <Association Name="FK_CancelOrders_FoodItems">
+          <End Role="FoodItems" Type="Self.FoodItem" Multiplicity="1" />
+          <End Role="CancelOrders" Type="Self.CancelOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FoodItems">
+              <PropertyRef Name="FoodID" />
+            </Principal>
+            <Dependent Role="CancelOrders">
+              <PropertyRef Name="FoodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CancelOrders_Orders1">
+          <End Role="Orders" Type="Self.Order" Multiplicity="1" />
+          <End Role="CancelOrders" Type="Self.CancelOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="CancelOrders">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderFood_FoodItems">
+          <End Role="FoodItems" Type="Self.FoodItem" Multiplicity="1" />
+          <End Role="OrderFood" Type="Self.OrderFood" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FoodItems">
+              <PropertyRef Name="FoodID" />
+            </Principal>
+            <Dependent Role="OrderFood">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderFood_Orders">
+          <End Role="Orders" Type="Self.Order" Multiplicity="1" />
+          <End Role="OrderFood" Type="Self.OrderFood" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="OrderFood">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB26Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CancelOrders" EntityType="Self.CancelOrder" />
+          <EntitySet Name="FoodItems" EntityType="Self.FoodItem" />
+          <EntitySet Name="OrderFoods" EntityType="Self.OrderFood" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="People" EntityType="Self.Person" />
+          <AssociationSet Name="FK_CancelOrders_FoodItems" Association="Self.FK_CancelOrders_FoodItems">
+            <End Role="FoodItems" EntitySet="FoodItems" />
+            <End Role="CancelOrders" EntitySet="CancelOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CancelOrders_Orders1" Association="Self.FK_CancelOrders_Orders1">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="CancelOrders" EntitySet="CancelOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderFood_FoodItems" Association="Self.FK_OrderFood_FoodItems">
+            <End Role="FoodItems" EntitySet="FoodItems" />
+            <End Role="OrderFood" EntitySet="OrderFoods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderFood_Orders" Association="Self.FK_OrderFood_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderFood" EntitySet="OrderFoods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Person" Association="Self.FK_Orders_Person">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB26ModelStoreContainer" CdmEntityContainer="DB26Entities">
+          <EntitySetMapping Name="CancelOrders">
+            <EntityTypeMapping TypeName="DB26Model.CancelOrder">
+              <MappingFragment StoreEntitySet="CancelOrders">
+                <ScalarProperty Name="FoodID" ColumnName="FoodID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FoodItems">
+            <EntityTypeMapping TypeName="DB26Model.FoodItem">
+              <MappingFragment StoreEntitySet="FoodItems">
+                <ScalarProperty Name="FoodID" ColumnName="FoodID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderFoods">
+            <EntityTypeMapping TypeName="DB26Model.OrderFood">
+              <MappingFragment StoreEntitySet="OrderFood">
+                <ScalarProperty Name="FoodID" ColumnName="FoodID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="DB26Model.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="Order_Date" ColumnName="Order_Date" />
+                <ScalarProperty Name="Bill" ColumnName="Bill" />
+                <ScalarProperty Name="Items" ColumnName="Items" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Delivery_Time" ColumnName="Delivery_Time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="DB26Model.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Cell_No" ColumnName="Cell_No" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Discriminator" ColumnName="Discriminator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
