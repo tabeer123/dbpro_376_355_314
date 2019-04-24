@@ -10,7 +10,7 @@ namespace Food.Controllers
 {
     public class AdminController : Controller
     {
-        private DB26Entities db = new DB26Entities();
+        private DB26Entities1 db = new DB26Entities1();
         // GET: Admin
         public ActionResult Index()
         {
@@ -21,7 +21,7 @@ namespace Food.Controllers
         {
             try
             {
-                var db = new DB26Entities();
+                var db = new DB26Entities1();
 
 
                 FoodItem food = new FoodItem();

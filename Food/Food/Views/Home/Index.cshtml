@@ -1,4 +1,4 @@
-﻿
+﻿@model Food.Controllers.Cart
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_MyLayout.cshtml";
@@ -6,3 +6,45 @@
 
 <h2>Index</h2>
 
+<style>
+    .table {
+        padding: 40px;
+    }
+</style>
+
+<div style="height:60px"></div>
+
+<div style="padding-left:40px; padding-right:40px">
+    <table class="table table-bordered table-responsive table-hover">
+        <tr class="table">
+            <th>Name </th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Picture</th>
+            <th>Add to Cart </th>
+        </tr>
+        @foreach (FoodItem f in ViewBag.listProduct)
+        {
+
+            <tr>
+                <td>@f.Name</td>
+                <td>@f.Category</td>
+                <td>@f.Price</td>
+                @*<td>@Html.TextBoxFor(model => model.Quantity, new { @type = "number", @value = 1, @max = 1, @min = 1 })</td>*@
+                <td>
+                    @{
+                        var base64 = Convert.ToBase64String(f.Picture);
+                        var imgsrc = string.Format("data:image/gif;base64.{0}", base64);
+
+                    }
+                    <img src='@imgsrc' style="max-width:300px;max-height:300px" />
+                </td>
+
+                <td align="center">@Html.ActionLink("Add to Cart", "Cart", "Home", new { id = f.FoodID }, null)</td>
+            </tr>
+        }
+
+
+    </table>
+</div>
+<div style="height:60px"></div>

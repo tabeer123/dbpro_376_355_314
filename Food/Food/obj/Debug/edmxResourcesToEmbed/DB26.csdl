@@ -64,6 +64,16 @@
     <Property Name="Discriminator" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Person" FromRole="Person" ToRole="Orders" />
   </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
   <Association Name="FK_CancelOrders_FoodItems">
     <End Role="FoodItems" Type="Self.FoodItem" Multiplicity="1" />
     <End Role="CancelOrders" Type="Self.CancelOrder" Multiplicity="*" />
@@ -124,12 +134,13 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="DB26Entities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="DB26Entities1" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="CancelOrders" EntityType="Self.CancelOrder" />
     <EntitySet Name="FoodItems" EntityType="Self.FoodItem" />
     <EntitySet Name="OrderFoods" EntityType="Self.OrderFood" />
     <EntitySet Name="Orders" EntityType="Self.Order" />
     <EntitySet Name="People" EntityType="Self.Person" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <AssociationSet Name="FK_CancelOrders_FoodItems" Association="Self.FK_CancelOrders_FoodItems">
       <End Role="FoodItems" EntitySet="FoodItems" />
       <End Role="CancelOrders" EntitySet="CancelOrders" />

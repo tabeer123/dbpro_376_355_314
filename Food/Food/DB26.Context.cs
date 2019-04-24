@@ -13,10 +13,10 @@ namespace Food
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DB26Entities : DbContext
+    public partial class DB26Entities1 : DbContext
     {
-        public DB26Entities()
-            : base("name=DB26Entities")
+        public DB26Entities1()
+            : base("name=DB26Entities1")
         {
         }
     
@@ -30,5 +30,6 @@ namespace Food
         public virtual DbSet<OrderFood> OrderFoods { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Person> People { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }
