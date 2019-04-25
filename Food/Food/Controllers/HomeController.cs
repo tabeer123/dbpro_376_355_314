@@ -16,7 +16,7 @@ namespace Food.Controllers
         {
             List<FoodItem> list = db.FoodItems.OrderBy(o => o.Name).ToList();
             ViewBag.listProduct = list;
-            return View();
+            return View(db.FoodItems.ToList());
         }
         public ActionResult Index1()
         {
@@ -47,7 +47,6 @@ namespace Food.Controllers
         {
             try
             {
-                //return View(db.OrderProducts.Where(x => x.OrderId == Convert.ToInt32(id) || id == null).ToString());
                 if (id == "")
                 {
                     return HttpNotFound();

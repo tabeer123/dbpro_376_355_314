@@ -145,6 +145,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Addfooditem.cs" />
+    <Compile Include="Models\OrderFoodViewModel.cs" />
+    <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Order.cs">
       <DependentUpon>DB26.tt</DependentUpon>
     </Compile>
@@ -178,7 +180,6 @@
     </Content>
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Cart.cshtml" />
-    <Content Include="Views\Home\Index1.cshtml" />
     <Content Include="Views\Home\TrackOrder.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -191,7 +192,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="assets\" />
     <Folder Include="Content\assets\" />
-    <Folder Include="Views\Cart\" />
+    <Folder Include="Controllers\Cart\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
