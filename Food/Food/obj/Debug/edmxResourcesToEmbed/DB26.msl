@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="DB26ModelStoreContainer" CdmEntityContainer="DB26Entities1">
+  <EntityContainerMapping StorageEntityContainer="DB26ModelStoreContainer" CdmEntityContainer="DB26Entities3">
     <EntitySetMapping Name="CancelOrders">
       <EntityTypeMapping TypeName="DB26Model.CancelOrder">
         <MappingFragment StoreEntitySet="CancelOrders">
@@ -25,9 +25,12 @@
     <EntitySetMapping Name="OrderFoods">
       <EntityTypeMapping TypeName="DB26Model.OrderFood">
         <MappingFragment StoreEntitySet="OrderFood">
-          <ScalarProperty Name="FoodID" ColumnName="FoodID" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
           <ScalarProperty Name="OrderID" ColumnName="OrderID" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -35,7 +38,6 @@
       <EntityTypeMapping TypeName="DB26Model.Order">
         <MappingFragment StoreEntitySet="Orders">
           <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-          <ScalarProperty Name="PersonID" ColumnName="PersonID" />
           <ScalarProperty Name="Order_Date" ColumnName="Order_Date" />
           <ScalarProperty Name="Bill" ColumnName="Bill" />
           <ScalarProperty Name="Items" ColumnName="Items" />

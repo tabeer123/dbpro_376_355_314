@@ -18,11 +18,9 @@ namespace Food
         public Order()
         {
             this.CancelOrders = new HashSet<CancelOrder>();
-            this.OrderFoods = new HashSet<OrderFood>();
         }
     
         public int OrderID { get; set; }
-        public int PersonID { get; set; }
         public System.DateTime Order_Date { get; set; }
         public double Bill { get; set; }
         public int Items { get; set; }
@@ -31,8 +29,5 @@ namespace Food
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CancelOrder> CancelOrders { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderFood> OrderFoods { get; set; }
-        public virtual Person Person { get; set; }
     }
 }

@@ -22,33 +22,29 @@
     <Property Name="Quantity" Type="Int32" Nullable="false" />
     <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="CancelOrders" Relationship="Self.FK_CancelOrders_FoodItems" FromRole="FoodItems" ToRole="CancelOrders" />
-    <NavigationProperty Name="OrderFoods" Relationship="Self.FK_OrderFood_FoodItems" FromRole="FoodItems" ToRole="OrderFood" />
   </EntityType>
   <EntityType Name="OrderFood">
     <Key>
-      <PropertyRef Name="FoodID" />
-      <PropertyRef Name="OrderID" />
+      <PropertyRef Name="ProductID" />
     </Key>
-    <Property Name="FoodID" Type="Int32" Nullable="false" />
+    <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="OrderID" Type="Int32" Nullable="false" />
     <Property Name="Quantity" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="FoodItem" Relationship="Self.FK_OrderFood_FoodItems" FromRole="OrderFood" ToRole="FoodItems" />
-    <NavigationProperty Name="Order" Relationship="Self.FK_OrderFood_Orders" FromRole="OrderFood" ToRole="Orders" />
+    <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Price" Type="Double" Nullable="false" />
   </EntityType>
   <EntityType Name="Order">
     <Key>
       <PropertyRef Name="OrderID" />
     </Key>
     <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="PersonID" Type="Int32" Nullable="false" />
     <Property Name="Order_Date" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Bill" Type="Double" Nullable="false" />
     <Property Name="Items" Type="Int32" Nullable="false" />
     <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Delivery_Time" Type="Time" Nullable="false" Precision="7" />
     <NavigationProperty Name="CancelOrders" Relationship="Self.FK_CancelOrders_Orders1" FromRole="Orders" ToRole="CancelOrders" />
-    <NavigationProperty Name="OrderFoods" Relationship="Self.FK_OrderFood_Orders" FromRole="Orders" ToRole="OrderFood" />
-    <NavigationProperty Name="Person" Relationship="Self.FK_Orders_Person" FromRole="Orders" ToRole="Person" />
   </EntityType>
   <EntityType Name="Person">
     <Key>
@@ -62,7 +58,6 @@
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Discriminator" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Person" FromRole="Person" ToRole="Orders" />
   </EntityType>
   <EntityType Name="sysdiagram">
     <Key>
@@ -98,43 +93,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_OrderFood_FoodItems">
-    <End Role="FoodItems" Type="Self.FoodItem" Multiplicity="1" />
-    <End Role="OrderFood" Type="Self.OrderFood" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="FoodItems">
-        <PropertyRef Name="FoodID" />
-      </Principal>
-      <Dependent Role="OrderFood">
-        <PropertyRef Name="OrderID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_OrderFood_Orders">
-    <End Role="Orders" Type="Self.Order" Multiplicity="1" />
-    <End Role="OrderFood" Type="Self.OrderFood" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Orders">
-        <PropertyRef Name="OrderID" />
-      </Principal>
-      <Dependent Role="OrderFood">
-        <PropertyRef Name="OrderID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Orders_Person">
-    <End Role="Person" Type="Self.Person" Multiplicity="1" />
-    <End Role="Orders" Type="Self.Order" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Person">
-        <PropertyRef Name="PersonID" />
-      </Principal>
-      <Dependent Role="Orders">
-        <PropertyRef Name="PersonID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityContainer Name="DB26Entities1" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="DB26Entities3" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="CancelOrders" EntityType="Self.CancelOrder" />
     <EntitySet Name="FoodItems" EntityType="Self.FoodItem" />
     <EntitySet Name="OrderFoods" EntityType="Self.OrderFood" />
@@ -148,18 +107,6 @@
     <AssociationSet Name="FK_CancelOrders_Orders1" Association="Self.FK_CancelOrders_Orders1">
       <End Role="Orders" EntitySet="Orders" />
       <End Role="CancelOrders" EntitySet="CancelOrders" />
-    </AssociationSet>
-    <AssociationSet Name="FK_OrderFood_FoodItems" Association="Self.FK_OrderFood_FoodItems">
-      <End Role="FoodItems" EntitySet="FoodItems" />
-      <End Role="OrderFood" EntitySet="OrderFoods" />
-    </AssociationSet>
-    <AssociationSet Name="FK_OrderFood_Orders" Association="Self.FK_OrderFood_Orders">
-      <End Role="Orders" EntitySet="Orders" />
-      <End Role="OrderFood" EntitySet="OrderFoods" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Orders_Person" Association="Self.FK_Orders_Person">
-      <End Role="Person" EntitySet="People" />
-      <End Role="Orders" EntitySet="Orders" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

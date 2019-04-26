@@ -190,6 +190,7 @@ window.onclick = function(event) {
 
 
                 <td align="center">@Html.ActionLink("Delete", "DeleteFoodItems", "Admin", new { id = @f.FoodID }, null)</td>
+                <td align="center">@Html.ActionLink("Edit", "EditFoodItems", "Admin", new { id = @f.FoodID }, null)</td>
             </tr>
         }
 

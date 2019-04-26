@@ -14,12 +14,6 @@ namespace Food
     
     public partial class Person
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Person()
-        {
-            this.Orders = new HashSet<Order>();
-        }
-    
         public int PersonID { get; set; }
         public string First_Name { get; set; }
         public string Last_Name { get; set; }
@@ -28,8 +22,5 @@ namespace Food
         public string Email { get; set; }
         public string Password { get; set; }
         public string Discriminator { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
     }
 }

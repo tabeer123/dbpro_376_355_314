@@ -9,7 +9,7 @@ namespace Food.Controllers
 {
     public class HomeController : Controller
     {
-        private DB26Entities1 db = new DB26Entities1();
+        private DB26Entities3 db = new DB26Entities3();
         int CurrentOrderTrackID;
         // GET: Home
         public ActionResult Index()
@@ -62,11 +62,12 @@ namespace Food.Controllers
                         if (Order.OrderID == Convert.ToInt32(id))
                         {
                             OrderFood Oproduct = new OrderFood();
-                            Oproduct.FoodItem.Picture= Order.FoodItem.Picture;
+                            //Oproduct.Order.Status = Order.Order.Status;
                             Oproduct.OrderID = Order.OrderID;
-                            Oproduct.FoodID = Order.FoodID;
-                           
-                           
+                            Oproduct.ProductID = Order.ProductID;
+                            Oproduct.Price = Order.Price;
+                            Oproduct.Category = Order.Category;
+                            Oproduct.ProductName = Order.ProductName;
                             Oproduct.Quantity = Order.Quantity;
                             productlist.Add(Oproduct);
 
@@ -106,13 +107,15 @@ namespace Food.Controllers
             }
         }
         [HttpPost]
-        public ActionResult CancelOrder()
+        public ActionResult CancelOrder(string id)
         {
-            foreach (OrderFood OP in db.OrderFoods)
+           
+           
+                    foreach (OrderFood OP in db.OrderFoods)
             {
-                if (OP.OrderID == 2)
-                {
-                    try
+                    if (OP.OrderID == Convert.ToInt32(id))
+                    {
+                        try
                     {
                         db.OrderFoods.Remove(OP);
                     }
@@ -133,11 +136,12 @@ namespace Food.Controllers
                     }
                 }
             }
+        
             db.SaveChanges();
-            db.Orders.Remove(db.Orders.Find(2));
+            db.Orders.Remove(db.Orders.Find(id));
             db.SaveChanges();
             ViewBag.listProduct = db.FoodItems.ToList();
-            return View("Index");
+            return View("CheckOut");
         }
         public ActionResult CheckOut()
         {
@@ -145,28 +149,31 @@ namespace Food.Controllers
             {
                 ViewBag.listProduct = db.FoodItems.ToList();
                 Order order = new Order();
+               
                 order.Order_Date = DateTime.Now;
-                order.Status = "pending";
+                order.Status = "Not-Deliver";
                 order.Bill = 1000;
                 List<Cart> cart = (List<Cart>)Session["cart"];
                 order.Items = cart.ToArray().Length;
                 db.Orders.Add(order);
                 db.SaveChanges();
                 int r = order.OrderID;
+                
                 for (int j = 0; j < cart.Count; j++)
                 {
+
                     FoodItem F = db.FoodItems.Find(cart[j].NewFood1.FoodID);
                     OrderFood orderProduct = new OrderFood();
                     orderProduct.OrderID = r;
-                   
+                    orderProduct.ProductName = F.Name;
                     orderProduct.Quantity = cart[j].Quantity;
-                   
-                   
+                    orderProduct.Price = F.Price;
+                    orderProduct.Category = F.Category;
                     db.OrderFoods.Add(orderProduct);
                     db.SaveChanges();
                 }
                 Session["cart"] = null;
-                return View("Index");
+                return View();
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
             {

@@ -1,4 +1,4 @@
-﻿@model Food.OrderFood
+﻿@model IEnumerable<Food.OrderFood>
 
 @{
     ViewBag.Title = "TrackOrder";
@@ -136,24 +136,16 @@
                                     <th>Category</th>
                                     <th>Price</th>
                                     <th>Quantity</th>
-                                    <th>Picture</th>
+                                    <th>Cancel Order</th>
                                 </tr>
                                 @foreach (OrderFood OrderP in ViewBag.Filterthroughid)
                                 {
                                     <tr>
-                                        <td>@OrderP.FoodItem.Name</td>
-                                    
-                                        <td>@OrderP.FoodItem.Category</td>
-                                        <td>@OrderP.FoodItem.Price</td>
+                                        <td>@OrderP.ProductName</td>
+                                        <td>@OrderP.Category</td>
+                                        <td>@OrderP.Price</td>
                                         <td>@OrderP.Quantity</td>
-                                        <td>
-                                            @{
-                                                var base64 = Convert.ToBase64String(OrderP.FoodItem.Picture);
-                                                var imgsrc = string.Format("data:image/gif;base64.{0}", base64);
-
-                                            }
-                                            <img src='@imgsrc' style="max-width:300px;max-height:300px" />
-                                        </td>
+                                        @*<td align="center">@Html.ActionLink("Cancel Order", "TrackOrder", "Home", new { id = OrderP.OrderID }, null)</td>*@
                                     </tr>
                                 }
 
@@ -161,6 +153,8 @@
                             @using (@Html.BeginForm("CancelOrder", "Home", FormMethod.Post))
                 {
                                 <button type="submit" style="float:right;padding-right:30px" class="btn btn-light">Cancel Order</button>
+                                
+
                             }
                             <div style="padding-right:20px"></div>
                             <div style="height:60px"></div>
@@ -174,6 +168,8 @@
 
 
     </div>
+
+
 
     <script>
 // Get the modal

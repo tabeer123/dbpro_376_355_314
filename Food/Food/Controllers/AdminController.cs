@@ -5,12 +5,12 @@ using System.Web;
 using System.Web.Mvc;
 using Food.Models;
 using System.Net;
-
+using System.Data.Entity;
 namespace Food.Controllers
 {
     public class AdminController : Controller
     {
-        private DB26Entities1 db = new DB26Entities1();
+        private DB26Entities3 db = new DB26Entities3();
         // GET: Admin
         public ActionResult Index()
         {
@@ -21,7 +21,7 @@ namespace Food.Controllers
         {
             try
             {
-                var db = new DB26Entities1();
+                var db = new DB26Entities3();
 
 
                 FoodItem food = new FoodItem();
@@ -71,7 +71,31 @@ namespace Food.Controllers
             return View();
 
         }
+        [HttpPost]
+        public ActionResult EditFoodItems(int id)
 
+        {
+            
+           
+
+            return View(db.FoodItems.Find(id));
+
+        }
+        [HttpPost]
+        public ActionResult EditFoodItems(Addfooditem obj, int id)
+        {
+            FoodItem f = db.FoodItems.Find(id);
+            if (ModelState.IsValid)
+            {
+                db.Entry(obj).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("ManageFoodItems");
+            }
+            else
+            {
+                return RedirectToAction("ManageFoodItems");
+            }
+        }
 
     }
 }

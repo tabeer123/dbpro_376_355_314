@@ -18,7 +18,6 @@ namespace Food
         public FoodItem()
         {
             this.CancelOrders = new HashSet<CancelOrder>();
-            this.OrderFoods = new HashSet<OrderFood>();
         }
     
         public int FoodID { get; set; }
@@ -30,7 +29,5 @@ namespace Food
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CancelOrder> CancelOrders { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderFood> OrderFoods { get; set; }
     }
 }
