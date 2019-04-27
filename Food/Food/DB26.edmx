@@ -137,7 +137,7 @@ warning 6002: The table/view 'DB26.dbo.CancelOrders' does not have a primary key
           <Property Name="OrderID" Type="Int32" Nullable="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="DB26Entities4" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="DB26Entities5" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="FoodItems" EntityType="Self.FoodItem" />
           <EntitySet Name="OrderFoods" EntityType="Self.OrderFood" />
           <EntitySet Name="Orders" EntityType="Self.Order" />
@@ -149,7 +149,7 @@ warning 6002: The table/view 'DB26.dbo.CancelOrders' does not have a primary key
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DB26ModelStoreContainer" CdmEntityContainer="DB26Entities4">
+        <EntityContainerMapping StorageEntityContainer="DB26ModelStoreContainer" CdmEntityContainer="DB26Entities5">
           <EntitySetMapping Name="FoodItems">
             <EntityTypeMapping TypeName="DB26Model.FoodItem">
               <MappingFragment StoreEntitySet="FoodItems">

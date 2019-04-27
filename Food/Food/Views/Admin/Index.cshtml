@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "FoodItemReport";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+
+<h2>Food Item Report</h2>
+<style>
+    .table {
+        padding: 40px;
+    }
+</style>
+
+<div style="height:60px"></div>
+
+<div style="padding-left:40px; padding-right:40px">
+    <table class="table table-bordered table-responsive table-hover">
+        <tr class="table">
+            <th>FoodID </th>
+            <th>Name </th>
+            <th>Price</th>
+            
+            <th>Category</th>
+        </tr>
+        @foreach (var f in ViewBag.ListFood)
+        {
+            <tr>
+                <td>@f.FoodID  </td>
+                <td>@f.Name </td>
+                <td>@f.Price</td>
+               
+                <td>@f.Category</td>
+
+
+              
+            </tr>
+        }
+
+
+    </table>
+    <br /><br />
+   
+    <a href="@Url.Action("Export", "Admin")">Export Report</a>
+</div>
+<div style="height:60px"></div>
+
+
+
+

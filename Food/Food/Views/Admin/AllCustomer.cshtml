@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "AllCustomer";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Report Of All Customer</h2>
+
+
+<style>
+    .table {
+        padding: 40px;
+    }
+</style>
+
+<div style="height:60px"></div>
+
+<div style="padding-left:40px; padding-right:40px">
+    <table class="table table-bordered table-responsive table-hover">
+        <tr class="table">
+            <th>PersonID </th>
+            <th>First Name </th>
+            <th>Last Name</th>
+
+            <th>Address</th>
+            <th>Cell No</th>
+
+            <th>Email</th>
+        </tr>
+        @foreach (var f in ViewBag.ListCustomer)
+        {
+            <tr>
+                <td>@f.PersonID  </td>
+                <td>@f.First_Name </td>
+                <td>@f.Last_Name</td>
+
+                <td>@f.Address</td>
+                <td>@f.Cell_No</td>
+
+                <td>@f.Email</td>
+
+
+
+            </tr>
+        }
+
+
+    </table>
+    <br /><br />
+
+    <a href="@Url.Action("Export1", "Admin")">Export Report</a>
+</div>
+<div style="height:60px"></div>
+

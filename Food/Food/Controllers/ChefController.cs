@@ -9,7 +9,7 @@ namespace Food.Controllers
     public class ChefController : Controller
     {
         // GET: Chef
-        private DB26Entities4 db = new DB26Entities4();
+        private DB26Entities5 db = new DB26Entities5();
         public ActionResult Index()
         {
             List<Order> list = db.Orders.OrderBy(o => o.Order_Date).ToList();

@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Nimra\Desktop\dbpro_376_355_314\Food\Food\DB26.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Ahmed Sohail\Desktop\dbpro_376_355_314\Food\Food\DB26.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

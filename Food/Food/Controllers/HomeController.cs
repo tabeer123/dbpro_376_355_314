@@ -9,7 +9,7 @@ namespace Food.Controllers
 {
     public class HomeController : Controller
     {
-        private DB26Entities4 db = new DB26Entities4();
+        private DB26Entities5 db = new DB26Entities5();
         int CurrentOrderTrackID;
         // GET: Home
         public ActionResult About()
@@ -181,20 +181,7 @@ namespace Food.Controllers
                     }
                     else
                     {
-                        foreach (OrderFood Order in db.OrderFoods)
-                        {
-                            if (Order.OrderID == Convert.ToInt32(id))
-                            {
-                                CancelOrder can = new CancelOrder();
-                                can.OrderID = Order.OrderID;
-                                can.FoodID = Order.ProductID;
-                                can.Quantity = Order.Quantity;
-                                db.CancelOrders.Add(can);
-                                
-                            }
-                           
-                        }
-                        db.SaveChanges();
+                        
                         foreach (OrderFood Order in db.OrderFoods)
                         {
                             if (Order.OrderID == Convert.ToInt32(id))

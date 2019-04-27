@@ -6,22 +6,123 @@ using System.Web.Mvc;
 using Food.Models;
 using System.Net;
 using System.Data.Entity;
+using Food.Models;
+using Food.Reports;
+using CrystalDecisions.CrystalReports.Engine;
+using System.IO;
+
 namespace Food.Controllers
 {
     public class AdminController : Controller
     {
-        private DB26Entities4 db = new DB26Entities4();
+        private DB26Entities5 db = new DB26Entities5();
         // GET: Admin
         public ActionResult Index()
         {
+            ViewBag.ListFood = db.FoodItems.ToList();
             return View();
+        }
+
+        public ActionResult Export()
+        {
+            ReportDocument rd = new ReportDocument();
+            rd.Load(Path.Combine(Server.MapPath("~/Reports/AllFoodItems.rpt")));
+            rd.SetDataSource(db.FoodItems.Select(t => new
+            {
+                FoodID = t.FoodID,
+                Name = t.Name,
+                Price = t.Price,
+                Quantity = t.Quantity,
+                Category = t.Category,
+
+
+
+
+            }).ToList());
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+            Stream stream = rd.ExportToStream
+                (CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "ListFood.pdf");
+            
+
+            
+    }
+        public ActionResult AllCustomer()
+        {
+            ViewBag.ListCustomer = db.People.ToList();
+            return View();
+        }
+        public ActionResult Export1()
+        {
+            ReportDocument rd = new ReportDocument();
+            rd.Load(Path.Combine(Server.MapPath("~/Reports/AllCoustomer.rpt")));
+            rd.SetDataSource(db.People.Select(t => new
+            {
+                PersonID = t.PersonID,
+                First_Name = t.First_Name,
+                Last_Name = t.Last_Name,
+                Address = t.Address,
+                Cell_No = t.Cell_No,
+                Email = t.Email,
+
+
+
+
+
+            }).ToList());
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+            Stream stream = rd.ExportToStream
+                (CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "CustomerReport.pdf");
+
+
+
+        }
+        public ActionResult AllOrder()
+        {
+            ViewBag.ListOrder = db.Orders.ToList();
+            return View();
+        }
+        public ActionResult Export2()
+        {
+            ReportDocument rd = new ReportDocument();
+            rd.Load(Path.Combine(Server.MapPath("~/Reports/AllOrdersReport.rpt")));
+            rd.SetDataSource(db.Orders.Select(t => new
+            {
+                OrderID = t.OrderID,
+                Bill = t.Bill,
+                Items= t.Items,
+                Status = t.Status,
+             
+
+
+
+
+
+            }).ToList());
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+            Stream stream = rd.ExportToStream
+                (CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "OrderReport.pdf");
+
+
+
         }
         [HttpPost]
         public ActionResult ManageFoodItems(Addfooditem obj,HttpPostedFileBase image1)
         {
             try
             {
-                var db = new DB26Entities4();
+                var db = new DB26Entities5();
 
 
                 FoodItem food = new FoodItem();

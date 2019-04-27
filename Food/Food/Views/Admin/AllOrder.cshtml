@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "AllOrder";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>AllOrder</h2>
+
+@{
+    ViewBag.Title = "OrdersReport";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>OrdersReport</h2>
+<style>
+    .table {
+        padding: 40px;
+    }
+</style>
+
+<div style="height:60px"></div>
+
+<div style="padding-left:40px; padding-right:40px">
+    <table class="table table-bordered table-responsive table-hover">
+        <tr class="table">
+            <th>OrderId </th>
+            <th>Date </th>
+            <th>Total Items</th>
+            <th>Status</th>
+           
+        </tr>
+        @foreach (Order f in ViewBag.ListOrder)
+        {
+            <tr>
+                <td>@f.OrderID</td>
+                <td>@f.Order_Date</td>
+                <td>@f.Items</td>
+                <td>@f.Status</td>
+
+   </tr>
+        }
+
+
+    </table>
+    <br /><br />
+
+    <a href="@Url.Action("Export2", "Admin")">Export Report</a>
+</div>
+<div style="height:60px"></div>
+
+

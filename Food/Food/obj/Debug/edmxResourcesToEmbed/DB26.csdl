@@ -56,7 +56,7 @@
     <Property Name="OrderID" Type="Int32" Nullable="false" />
     <Property Name="Quantity" Type="Int32" Nullable="false" />
   </EntityType>
-  <EntityContainer Name="DB26Entities4" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="DB26Entities5" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="FoodItems" EntityType="Self.FoodItem" />
     <EntitySet Name="OrderFoods" EntityType="Self.OrderFood" />
     <EntitySet Name="Orders" EntityType="Self.Order" />

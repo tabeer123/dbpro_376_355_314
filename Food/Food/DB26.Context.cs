@@ -13,10 +13,10 @@ namespace Food
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DB26Entities4 : DbContext
+    public partial class DB26Entities5 : DbContext
     {
-        public DB26Entities4()
-            : base("name=DB26Entities4")
+        public DB26Entities5()
+            : base("name=DB26Entities5")
         {
         }
     

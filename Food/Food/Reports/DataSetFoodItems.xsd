@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DataSetFoodItems" targetNamespace="http://tempuri.org/DataSetFoodItems.xsd" xmlns:mstns="http://tempuri.org/DataSetFoodItems.xsd" xmlns="http://tempuri.org/DataSetFoodItems.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataSetFoodItems" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSetFoodItems" msprop:Generator_UserDSName="DataSetFoodItems">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="FoodItems" msprop:Generator_TableClassName="FoodItemsDataTable" msprop:Generator_TableVarName="tableFoodItems" msprop:Generator_TablePropName="FoodItems" msprop:Generator_RowDeletingName="FoodItemsRowDeleting" msprop:Generator_RowChangingName="FoodItemsRowChanging" msprop:Generator_RowEvHandlerName="FoodItemsRowChangeEventHandler" msprop:Generator_RowDeletedName="FoodItemsRowDeleted" msprop:Generator_UserTableName="FoodItems" msprop:Generator_RowChangedName="FoodItemsRowChanged" msprop:Generator_RowEvArgName="FoodItemsRowChangeEvent" msprop:Generator_RowClassName="FoodItemsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FoodID" msprop:Generator_ColumnVarNameInTable="columnFoodID" msprop:Generator_ColumnPropNameInRow="FoodID" msprop:Generator_ColumnPropNameInTable="FoodIDColumn" msprop:Generator_UserColumnName="FoodID" type="xs:int" minOccurs="0" />
+              <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name" type="xs:string" minOccurs="0" />
+              <xs:element name="Price" msprop:Generator_ColumnVarNameInTable="columnPrice" msprop:Generator_ColumnPropNameInRow="Price" msprop:Generator_ColumnPropNameInTable="PriceColumn" msprop:Generator_UserColumnName="Price" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Quantity" msprop:Generator_ColumnVarNameInTable="columnQuantity" msprop:Generator_ColumnPropNameInRow="Quantity" msprop:Generator_ColumnPropNameInTable="QuantityColumn" msprop:Generator_UserColumnName="Quantity" type="xs:int" minOccurs="0" />
+              <xs:element name="Category" msprop:Generator_ColumnVarNameInTable="columnCategory" msprop:Generator_ColumnPropNameInRow="Category" msprop:Generator_ColumnPropNameInTable="CategoryColumn" msprop:Generator_UserColumnName="Category" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
