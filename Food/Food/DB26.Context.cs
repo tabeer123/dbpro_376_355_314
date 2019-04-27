@@ -13,10 +13,10 @@ namespace Food
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DB26Entities3 : DbContext
+    public partial class DB26Entities4 : DbContext
     {
-        public DB26Entities3()
-            : base("name=DB26Entities3")
+        public DB26Entities4()
+            : base("name=DB26Entities4")
         {
         }
     
@@ -25,11 +25,10 @@ namespace Food
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<CancelOrder> CancelOrders { get; set; }
         public virtual DbSet<FoodItem> FoodItems { get; set; }
         public virtual DbSet<OrderFood> OrderFoods { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Person> People { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<CancelOrder> CancelOrders { get; set; }
     }
 }

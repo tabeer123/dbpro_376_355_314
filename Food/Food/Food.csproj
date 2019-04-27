@@ -99,69 +99,85 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\favicon.ico" />
     <Content Include="Content\index.html" />
     <Content Include="Content\Readme.txt" />
-    <Content Include="db26.Context.tt">
+    <Content Include="Content\Site.css" />
+    <Content Include="DB26.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>db26.edmx</DependentUpon>
-      <LastGenOutput>db26.Context.cs</LastGenOutput>
+      <DependentUpon>DB26.edmx</DependentUpon>
+      <LastGenOutput>DB26.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="db26.tt">
+    <Content Include="DB26.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>db26.edmx</DependentUpon>
-      <LastGenOutput>db26.cs</LastGenOutput>
+      <DependentUpon>DB26.edmx</DependentUpon>
+      <LastGenOutput>DB26.cs</LastGenOutput>
     </Content>
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="DB26.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DB26.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="DB26.edmx.diagram">
+      <DependentUpon>DB26.edmx</DependentUpon>
+    </Content>
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="CancelOrder.cs">
-      <DependentUpon>db26.tt</DependentUpon>
+      <DependentUpon>DB26.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\Cart.cs" />
+    <Compile Include="Controllers\ChefController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
-    <Compile Include="db26.Context.cs">
+    <Compile Include="DB26.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>db26.Context.tt</DependentUpon>
+      <DependentUpon>DB26.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="db26.cs">
+    <Compile Include="DB26.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>db26.tt</DependentUpon>
+      <DependentUpon>DB26.tt</DependentUpon>
     </Compile>
-    <Compile Include="db26.Designer.cs">
+    <Compile Include="DB26.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>db26.edmx</DependentUpon>
+      <DependentUpon>DB26.edmx</DependentUpon>
     </Compile>
     <Compile Include="FoodItem.cs">
-      <DependentUpon>db26.tt</DependentUpon>
+      <DependentUpon>DB26.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Addfooditem.cs" />
+    <Compile Include="Models\cancelview.cs" />
     <Compile Include="Models\OrderFoodViewModel.cs" />
     <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Models\UserAccount.cs" />
     <Compile Include="Order.cs">
-      <DependentUpon>db26.tt</DependentUpon>
+      <DependentUpon>DB26.tt</DependentUpon>
     </Compile>
     <Compile Include="OrderFood.cs">
-      <DependentUpon>db26.tt</DependentUpon>
+      <DependentUpon>DB26.tt</DependentUpon>
     </Compile>
     <Compile Include="Person.cs">
-      <DependentUpon>db26.tt</DependentUpon>
+      <DependentUpon>DB26.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>db26.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -173,21 +189,30 @@
     <Content Include="Views\Admin\DeleteFoodItems.cshtml" />
     <Content Include="Views\Home\View.cshtml" />
     <Content Include="Views\Home\check.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Cart.cshtml" />
     <Content Include="Views\Home\TrackOrder.cshtml" />
     <Content Include="Views\Register\Index.cshtml" />
     <Content Include="Views\Register\Register.cshtml" />
     <Content Include="Views\Register\Login.cshtml" />
     <Content Include="Views\Admin\EditFoodItems.cshtml" />
-    <EntityDeploy Include="db26.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>db26.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="db26.edmx.diagram">
-      <DependentUpon>db26.edmx</DependentUpon>
-    </Content>
     <Content Include="Views\Home\CheckOut.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\CancelOrder.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Admin\OrdersReport.cshtml" />
+    <Content Include="Views\Admin\DetailsOrder.cshtml" />
+    <Content Include="Views\Chef\Index.cshtml" />
+    <Content Include="Views\Chef\DetailsOrder.cshtml" />
+    <Content Include="Views\Chef\notdeliver.cshtml" />
+    <Content Include="Views\Chef\changestatusList.cshtml" />
+    <Content Include="Views\Chef\DeliveredOrders.cshtml" />
+    <Content Include="Views\Shared\_LayoutRegister.cshtml" />
+    <Content Include="Views\Shared\_LayoutChef.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

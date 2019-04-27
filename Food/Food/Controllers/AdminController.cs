@@ -10,7 +10,7 @@ namespace Food.Controllers
 {
     public class AdminController : Controller
     {
-        private DB26Entities3 db = new DB26Entities3();
+        private DB26Entities4 db = new DB26Entities4();
         // GET: Admin
         public ActionResult Index()
         {
@@ -21,7 +21,7 @@ namespace Food.Controllers
         {
             try
             {
-                var db = new DB26Entities3();
+                var db = new DB26Entities4();
 
 
                 FoodItem food = new FoodItem();
@@ -95,6 +95,38 @@ namespace Food.Controllers
             {
                 return RedirectToAction("ManageFoodItems");
             }
+        }
+
+        public ActionResult OrdersReport()
+        {
+            ViewBag.listProduct = db.Orders.ToList();
+
+            return View();
+        }
+
+        public ActionResult DetailsOrder(int Id)
+        {
+            List<OrderFood> list = new List<OrderFood>();
+            foreach (OrderFood p in db.OrderFoods)
+            {
+                if (p.OrderID == Id)
+                {
+                    OrderFood p1 = new OrderFood();
+                    p1.OrderID = p.OrderID;
+                    p1.ProductID = p.ProductID;
+                    p1.ProductName = p.ProductName;
+                    p1.Price = p.Price;
+                    p1.Quantity = p.Quantity;
+
+                    list.Add(p1);
+
+                }
+            }
+            ViewBag.ListProduct = list;
+
+            return View();
+
+
         }
 
     }

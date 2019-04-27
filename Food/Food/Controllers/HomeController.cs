@@ -9,15 +9,22 @@ namespace Food.Controllers
 {
     public class HomeController : Controller
     {
-        private DB26Entities3 db = new DB26Entities3();
+        private DB26Entities4 db = new DB26Entities4();
         int CurrentOrderTrackID;
         // GET: Home
+        public ActionResult About()
+        {
+            ViewBag.Message = "Your application description page.";
+
+            return View();
+        }
         public ActionResult Index()
         {
             List<FoodItem> list = db.FoodItems.OrderBy(o => o.Name).ToList();
             ViewBag.listProduct = list;
             return View(db.FoodItems.ToList());
         }
+   
         public ActionResult Index1()
         {
             var items = (from d in db.FoodItems
@@ -29,13 +36,7 @@ namespace Food.Controllers
             return View();
         }
 
-        public ActionResult About()
-        {
-
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
+       
         public ActionResult TrackOrder()
         {
             ViewBag.Filterthroughid = "";
@@ -70,6 +71,12 @@ namespace Food.Controllers
                             Oproduct.ProductName = Order.ProductName;
                             Oproduct.Quantity = Order.Quantity;
                             productlist.Add(Oproduct);
+
+                            cancelview can = new cancelview();
+                            can.OrderID = Order.OrderID;
+                            can.FoodID = Order.ProductID;
+                            can.Quantity = Order.Quantity;
+                            db.SaveChanges();
 
 
                         }
@@ -106,42 +113,122 @@ namespace Food.Controllers
                 throw raise;
             }
         }
+        //[HttpPost]
+        //public ActionResult CancelOrder()
+        //{
+
+
+        //            foreach (OrderFood OP in db.OrderFoods)
+        //    {
+        //            if (OP.OrderID == 2)
+        //            {
+        //                try
+        //            {
+        //                db.OrderFoods.Remove(OP);
+
+
+        //            }
+        //            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+        //            {
+        //                Exception raise = dbEx;
+        //                foreach (var validationErrors in dbEx.EntityValidationErrors)
+        //                {
+        //                    foreach (var validationError in validationErrors.ValidationErrors)
+        //                    {
+        //                        string message = string.Format("{0}:{1}",
+        //                            validationErrors.Entry.Entity.ToString(),
+        //                            validationError.ErrorMessage);
+        //                        raise = new InvalidOperationException(message, raise);
+        //                    }
+        //                }
+        //                throw raise;
+        //            }
+        //        }
+        //    }
+
+        //    db.SaveChanges();
+        //    db.Orders.Remove(db.Orders.Find(2));
+
+        //    db.SaveChanges();
+        //    ViewBag.listProduct = db.FoodItems.ToList();
+        //    return View("CheckOut");
+        //}
+        public ActionResult CancelOrder()
+        {
+           
+            return View();
+
+        }
         [HttpPost]
         public ActionResult CancelOrder(string id)
         {
-           
-           
-                    foreach (OrderFood OP in db.OrderFoods)
+            try
             {
-                    if (OP.OrderID == Convert.ToInt32(id))
+                if (id == "")
+                {
+                    return HttpNotFound();
+
+                }
+                else
+                {
+                    int r = Convert.ToInt32(id);
+                    Order order = new Order();
+                   
+                    order = db.Orders.Find(Convert.ToInt32(id));
+                    if (order == null)
                     {
-                        try
-                    {
-                        db.OrderFoods.Remove(OP);
+                        ViewBag.NULL = true;
                     }
-                    catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+                    else
                     {
-                        Exception raise = dbEx;
-                        foreach (var validationErrors in dbEx.EntityValidationErrors)
+                        foreach (OrderFood Order in db.OrderFoods)
                         {
-                            foreach (var validationError in validationErrors.ValidationErrors)
+                            if (Order.OrderID == Convert.ToInt32(id))
                             {
-                                string message = string.Format("{0}:{1}",
-                                    validationErrors.Entry.Entity.ToString(),
-                                    validationError.ErrorMessage);
-                                raise = new InvalidOperationException(message, raise);
+                                CancelOrder can = new CancelOrder();
+                                can.OrderID = Order.OrderID;
+                                can.FoodID = Order.ProductID;
+                                can.Quantity = Order.Quantity;
+                                db.CancelOrders.Add(can);
+                                
                             }
+                           
                         }
-                        throw raise;
+                        db.SaveChanges();
+                        foreach (OrderFood Order in db.OrderFoods)
+                        {
+                            if (Order.OrderID == Convert.ToInt32(id))
+                            {
+                                db.OrderFoods.Remove(Order);
+                                
+                            }
+                            
+                        }
+                        db.SaveChanges();
+
+                        db.Orders.Remove(db.Orders.Find(Convert.ToInt32(id)));
+
+                           db.SaveChanges();
+                       
                     }
+                    return View("About");
                 }
             }
-        
-            db.SaveChanges();
-            db.Orders.Remove(db.Orders.Find(id));
-            db.SaveChanges();
-            ViewBag.listProduct = db.FoodItems.ToList();
-            return View("CheckOut");
+            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            {
+                Exception raise = dbEx;
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        string message = string.Format("{0}:{1}",
+                            validationErrors.Entry.Entity.ToString(),
+                            validationError.ErrorMessage);
+                        raise = new InvalidOperationException(message, raise);
+                    }
+                }
+                throw raise;
+            }
         }
         public ActionResult CheckOut()
         {

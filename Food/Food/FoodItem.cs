@@ -14,20 +14,11 @@ namespace Food
     
     public partial class FoodItem
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public FoodItem()
-        {
-            this.CancelOrders = new HashSet<CancelOrder>();
-        }
-    
         public int FoodID { get; set; }
         public string Name { get; set; }
         public double Price { get; set; }
         public byte[] Picture { get; set; }
         public int Quantity { get; set; }
         public string Category { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CancelOrder> CancelOrders { get; set; }
     }
 }

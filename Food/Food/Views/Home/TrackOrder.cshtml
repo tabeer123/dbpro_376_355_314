@@ -88,7 +88,7 @@
 </style>
 
 
-<div class="textbox">
+<div class="textbox"></div>
 
     <h2 class="writing">Track Your Order Here</h2>
 
@@ -136,34 +136,35 @@
                                     <th>Category</th>
                                     <th>Price</th>
                                     <th>Quantity</th>
-                                    <th>Cancel Order</th>
+                                  
                                 </tr>
                                 @foreach (OrderFood OrderP in ViewBag.Filterthroughid)
                                 {
                                     <tr>
+                                        
                                         <td>@OrderP.ProductName</td>
                                         <td>@OrderP.Category</td>
                                         <td>@OrderP.Price</td>
                                         <td>@OrderP.Quantity</td>
-                                        @*<td align="center">@Html.ActionLink("Cancel Order", "TrackOrder", "Home", new { id = OrderP.OrderID }, null)</td>*@
+                                       @* <td align="center">@Html.ActionLink("Cancel", "CancelOrder", "Home", new { id = OrderP.OrderID }, null)</td>*@
                                     </tr>
                                 }
 
                             </table>
-                            @using (@Html.BeginForm("CancelOrder", "Home", FormMethod.Post))
-                {
+                            @*@using (@Html.BeginForm("CancelOrder", "Home", FormMethod.Post))
+                            {
                                 <button type="submit" style="float:right;padding-right:30px" class="btn btn-light">Cancel Order</button>
-                                
 
-                            }
+
+                            }*@
                             <div style="padding-right:20px"></div>
                             <div style="height:60px"></div>
                         </div>
 
                     </div>
                 </div>
+                }
             }
-        }
         <!-- Modal content -->
 
 

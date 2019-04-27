@@ -10,7 +10,7 @@ namespace Food.Controllers
     public class RegisterController : Controller
     {
 
-        private DB26Entities3 db = new DB26Entities3();
+        private DB26Entities4 db = new DB26Entities4();
         // GET: Register
         public ActionResult Index()
         {
@@ -26,7 +26,7 @@ namespace Food.Controllers
         {
             try
             {
-                var db = new DB26Entities3();
+                var db = new DB26Entities4();
 
 
                 Person p = new Person();
@@ -73,7 +73,7 @@ namespace Food.Controllers
         [HttpPost]
         public ActionResult Autherize(Food.Models.UserAccount userModel)
         {
-            using (DB26Entities3 db = new DB26Entities3())
+            using (DB26Entities4 db = new DB26Entities4())
             {
                 var userDetails = db.People.Where(x => x.Email == userModel.Email && x.Password == userModel.Password).FirstOrDefault();
                 if (userDetails == null)
