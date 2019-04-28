@@ -43,6 +43,7 @@ namespace Food.Controllers
             return View();
 
         }
+        // For Tracking Order to check the status of Order
         [HttpPost]
         public ActionResult TrackOrder(string id)
         {
@@ -153,6 +154,9 @@ namespace Food.Controllers
         //    ViewBag.listProduct = db.FoodItems.ToList();
         //    return View("CheckOut");
         //}
+        
+
+            // Cancel Order through Assigned Order Id
         public ActionResult CancelOrder()
         {
            
@@ -217,6 +221,7 @@ namespace Food.Controllers
                 throw raise;
             }
         }
+        //Billing Information and other details about date and time
         public ActionResult CheckOut()
         {
             try
@@ -265,6 +270,7 @@ namespace Food.Controllers
                 throw raise;
             }
         }
+        //For managing Cart
         private int isPresent(int id)
         {
             List<Cart> cart = (List<Cart>)Session["cart"];

@@ -10,6 +10,7 @@ namespace Food.Controllers
     {
         // GET: Chef
         private DB26Entities5 db = new DB26Entities5();
+        // Forwarding Order to chef
         public ActionResult Index()
         {
             List<Order> list = db.Orders.OrderBy(o => o.Order_Date).ToList();
@@ -61,6 +62,7 @@ namespace Food.Controllers
             return View();
 
         }
+        // Change Status from not deliver to deliver when food is prepared
         public ActionResult changestatusList(int Id)
         {
             Order f = db.Orders.Find(Id);
