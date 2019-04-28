@@ -117,6 +117,7 @@ namespace Food.Controllers
 
 
         }
+        //Add Food Items
         [HttpPost]
         public ActionResult ManageFoodItems(Addfooditem obj,HttpPostedFileBase image1)
         {
@@ -162,6 +163,7 @@ namespace Food.Controllers
 
             return View();
         }
+        // Delete Food Items
         public ActionResult DeleteFoodItems(int id)
         {
             FoodItem f = db.FoodItems.Find(id);
