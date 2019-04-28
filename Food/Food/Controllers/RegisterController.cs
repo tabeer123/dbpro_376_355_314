@@ -20,6 +20,7 @@ namespace Food.Controllers
         {
             return View();
         }
+        // To register the Person
 
         [HttpPost]
         public ActionResult Register(UserAccount acc)
@@ -93,6 +94,10 @@ namespace Food.Controllers
                     else if (userDetails.Discriminator == "Admin")
                     {
                         return RedirectToAction("ManageFoodItems", "Admin");
+                    }
+                    else if (userDetails.Discriminator == "Chef")
+                    {
+                        return RedirectToAction("Index", "Chef");
                     }
                     else
                     {

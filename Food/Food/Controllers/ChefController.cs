@@ -43,6 +43,7 @@ namespace Food.Controllers
 
 
         }
+        //All pending and in process orders
         public ActionResult notdeliver()
         {
             List<Order> po = new List<Order>();
@@ -84,7 +85,7 @@ namespace Food.Controllers
             ViewBag.listProduct = po;
             return View();
         }
-
+        //All completed Orders
         public ActionResult DeliveredOrders()
         {
             List<Order> po = new List<Order>();
